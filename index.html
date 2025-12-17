@@ -8,6 +8,23 @@
 <body>
   <h1>面談予約フォーム</h1>
 
+    <section>
+    <h2>基本情報</h2>
+    <div>
+      <label>氏名（必須）<br><input id="name" /></label>
+    </div>
+    <div>
+      <label>メール（必須）<br><input id="email" type="email" /></label>
+    </div>
+  </section>
+
+  <section>
+    <h2>面談枠</h2>
+    <p id="loading">空き枠を取得中…</p>
+    <select id="slotSelect" disabled>
+      <option value="">選択してください</option>
+    </select>
+  
   <section>
   <h2>個人情報の取り扱いについて</h2>
 
@@ -50,25 +67,6 @@
     上記に同意します（必須）
   </label>
 </section>
-
-
-  <section>
-    <h2>基本情報</h2>
-    <div>
-      <label>氏名（必須）<br><input id="name" /></label>
-    </div>
-    <div>
-      <label>メール（必須）<br><input id="email" type="email" /></label>
-    </div>
-  </section>
-
-  <section>
-    <h2>面談枠</h2>
-    <p id="loading">空き枠を取得中…</p>
-    <select id="slotSelect" disabled>
-      <option value="">選択してください</option>
-    </select>
-  </section>
 
   <button id="submitBtn">予約する</button>
 
