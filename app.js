@@ -37,7 +37,7 @@ async function submitBooking() {
   if (!email) return alert("メールが必要です。");
   if (!slotId) return alert("面談枠を選択してください。");
 
-  const payload = { name, email, slotId };
+  const payload = { name, email, slotId, consent: consent };
 
   el("submitBtn").disabled = true;
   el("result").textContent = "送信中…";
