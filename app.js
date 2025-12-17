@@ -1,4 +1,3 @@
-// ここに Cloudflare Workers のURLを入れます（後で作ります）
 const API_BASE = "https://wispy-butterfly-2a2d.m-oka-newdaysys.workers.dev";
 
 const el = (id) => document.getElementById(id);
@@ -9,9 +8,14 @@ async function loadSlots() {
 
   try {
     const r = await fetch(`${API_BASE}/slots`);
-    if (!r.ok) throw new Error(`slots fetch failed: ${r.status}`);
-    const data = await r.json(); // [{id, label}]
-    select.innerHTML = `<option value="">選択してください</option>` +
+    const data = await r.json();
+
+    if (!r.ok) {
+      throw new Error(data?.error || JSON.stringify(data));
+    }
+
+    select.innerHTML =
+      `<option value="">選択してください</option>` +
       data.map(s => `<option value="${s.id}">${s.label}</option>`).join("");
 
     select.disabled = false;
@@ -44,11 +48,18 @@ async function submitBooking() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    const data = await r.json();
-    if (!r.ok) throw new Error(JSON.stringify(data));
 
-    el("result").textContent = "予約完了しました。\n予約ID: " + data.bookingId;
-    // 予約後、空き枠を再読み込み（リアルタイム反映）
+    const data = await r.json();
+
+    // ★重要：HTTPが200でも ok=false は失敗扱い
+    if (!r.ok) {
+      throw new Error(data?.error || data?.message || JSON.stringify(data));
+    }
+    if (data?.ok !== true) {
+      throw new Error(data?.message || "予約に失敗しました（詳細不明）");
+    }
+
+    el("result").textContent = `予約完了しました。\n予約ID: ${data.bookingId}`;
     await loadSlots();
   } catch (e) {
     el("result").textContent = "送信に失敗しました。\n" + String(e);
