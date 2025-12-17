@@ -1,5 +1,5 @@
 // ここに Cloudflare Workers のURLを入れます（後で作ります）
-const API_BASE = "https://YOUR-WORKER.example.workers.dev";
+const API_BASE = "https://wispy-butterfly-2a2d.m-oka-newdaysys.workers.dev";
 
 const el = (id) => document.getElementById(id);
 
