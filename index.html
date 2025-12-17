@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>面談予約フォーム</title>
+</head>
+<body>
+  <h1>面談予約フォーム</h1>
+
+  <section>
+    <h2>個人情報の取扱い</h2>
+    <p>
+      本フォームで取得した個人情報は、面談の実施、面談日程の調整、本件に関するご連絡の目的で利用します。
+      法令に基づく場合を除き、第三者に提供しません。
+    </p>
+    <label>
+      <input type="checkbox" id="consent" />
+      上記に同意します（必須）
+    </label>
+  </section>
+
+  <section>
+    <h2>基本情報</h2>
+    <div>
+      <label>氏名（必須）<br><input id="name" /></label>
+    </div>
+    <div>
+      <label>メール（必須）<br><input id="email" type="email" /></label>
+    </div>
+  </section>
+
+  <section>
+    <h2>面談枠</h2>
+    <p id="loading">空き枠を取得中…</p>
+    <select id="slotSelect" disabled>
+      <option value="">選択してください</option>
+    </select>
+  </section>
+
+  <button id="submitBtn">予約する</button>
+
+  <pre id="result"></pre>
+
+  <script src="./app.js"></script>
+</body>
+</html>
