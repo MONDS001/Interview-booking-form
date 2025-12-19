@@ -4,31 +4,248 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>オンライン面談予約フォーム</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1f2328;
+      --muted: #667085;
+      --line: #d0d7de;
+      --accent: #0969da;
+      --danger: #d1242f;
+      --shadow: 0 6px 24px rgba(0,0,0,0.08);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 14px 60px;
+    }
+
+    header {
+      padding: 18px 16px 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+
+    .note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 0 0 6px;
+      font-size: 14px;
+    }
+
+    .required {
+      color: var(--danger);
+      font-weight: 700;
+      margin-left: 6px;
+      font-size: 12.5px;
+    }
+
+    input[type="text"], input[type="email"], select {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 15px;
+    }
+
+    select:disabled {
+      background: #f3f4f6;
+      color: #9aa4b2;
+    }
+
+    .consent-box {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      height: 240px;
+      overflow: auto;
+      background: #fbfbfc;
+      white-space: pre-wrap;
+      font-size: 13.5px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 12px;
+    }
+
+    .checkbox-row input {
+      margin-top: 4px;
+      transform: scale(1.15);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 15.5px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      min-width: 220px;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .result {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .small {
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 0 2px;
+    }
+  </style>
 </head>
+
 <body>
-  < <>オンライン面談予約フォーム</h1>
+  <div class="wrap">
+    <header>
+      <h1>オンライン面談予約フォーム</h1>
+      <p class="lead">
+        本フォームは、面談日程の調整を目的としたものです。ご入力いただいた内容は、面談対応のみに使用いたします。
+      </p>
+    </header>
 
-    <section>
-    <h2>基本情報</h2>
-    <div>
-      <label>氏名（必須）<br><input id="name" /></label>
-    </div>
-    <div>
-      <label>メール（必須）<br><input id="email" type="email" /></label>
-    </div>
-  </section>
+    <main>
+      <!-- 面談について -->
+      <section class="card" aria-labelledby="about-title">
+        <h2 id="about-title">面談について</h2>
+        <div class="small">
+          本面談は、これまでのご経験やご希望をお伺いし、今後の選択肢をご案内するためのオンライン面談です。<br />
+          ・所要時間：30分程度<br />
+          ・実施方法：オンライン（URLは後日ご案内）<br />
+          ・服装：自由
+        </div>
+      </section>
 
-  <section>
-    <h2>面談枠</h2>
-    <p id="loading">空き枠を取得中…</p>
-    <select id="slotSelect" disabled>
-      <option value="">選択してください</option>
-    </select>
-  
-  <section>
-  <h2>個人情報の取り扱いについて</h2>
+      <!-- 連絡先 -->
+      <section class="card" aria-labelledby="contact-title">
+        <h2 id="contact-title">ご連絡先の入力</h2>
+        <div class="grid">
+          <div>
+            <label for="name">お名前<span class="required">（必須）</span></label>
+            <input id="name" type="text" autocomplete="name" placeholder="例：山田 太郎" />
+            <p class="note">面談のご案内に使用します。</p>
+          </div>
 
-  <div style="border:1px solid #ccc; padding:10px; height:220px; overflow:auto; white-space:pre-wrap;">
+          <div>
+            <label for="email">メールアドレス<span class="required">（必須）</span></label>
+            <input id="email" type="email" autocomplete="email" placeholder="例：taro.yamada@example.com" />
+            <p class="note">面談URLの送付先です。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 面談希望日時 -->
+      <section class="card" aria-labelledby="slot-title">
+        <h2 id="slot-title">面談希望日時の選択</h2>
+        <p class="note">
+          現在予約可能な日時のみが表示されます。ご都合のよい日時を1つお選びください。<br />
+          ※開始まで120分以内の枠は選択できません。
+        </p>
+
+        <div style="margin-top:10px;">
+          <label for="slotSelect">予約可能な日時<span class="required">（必須）</span></label>
+          <select id="slotSelect" disabled>
+            <option value="">読み込み中…</option>
+          </select>
+          <div class="status" id="loading" style="margin-top:8px;">空き枠を取得中…</div>
+        </div>
+      </section>
+
+      <!-- 個人情報同意 -->
+      <section class="card" aria-labelledby="consent-title">
+        <h2 id="consent-title">個人情報の取り扱いについて</h2>
+
+        <div class="consent-box" role="region" aria-label="個人情報の取り扱い（全文）">
 個人情報の取り扱いについて
 弊社は応募者の個人情報をお預かりすることになりますが、そのお預かりした個人情報の取扱について、下記のように管理し、保護に努めて参ります。
 
@@ -43,7 +260,6 @@
 人の生命、身体又は財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき
 公衆衛生の向上又は児童の健全な育成の推進のために特に必要がある場合であって、本人の同意を得ることが困難であるとき
 国の機関若しくは地方公共団体又はその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることによって当該事務の遂行に支障を及ぼすおそれがあるとき
-
 【第三者への提供】
 弊社は法律で定められている場合を除いて、応募者の個人情報を当該応募者の同意を得ず第三者に提供・委託することはありません。ただし、官公庁等から法的な手続きにより個人情報について開示が求められた場合は、関係法令に反しない範囲において、応募者の同意なく応募内容を提供することがあります。
 
@@ -57,23 +273,47 @@
 当社は、提供を受けた個人情報をもとに、個人を特定できないよう加工した統計データを作成することがあります。個人を特定できない統計データについては、当社は何ら制限なく利用することができるものとします。
 
 【ご質問及びご苦情の窓口】
+当社における個人データの取り扱いに関するご質問やご苦情に関しては下記の窓口にご連絡ください。
+
 住所：〒420-0857　静岡県静岡市葵区御幸町4-1　アーバンネット静岡ビル6F
+
 電話番号：054-378-8140
+
 受付時間：9:00～18:00（平日）
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="consent" />
+          <label for="consent" style="font-weight:600;">
+            上記の個人情報の取り扱いについて同意します<span class="required">（必須）</span>
+            <div class="note">同意いただけない場合、面談予約はできません。</div>
+          </label>
+        </div>
+      </section>
+
+      <!-- 送信 -->
+      <section class="card" aria-labelledby="submit-title">
+        <h2 id="submit-title">予約の確定</h2>
+        <p class="note">
+          入力内容をご確認のうえ、予約を確定してください。送信後、予約情報が登録されます。
+        </p>
+
+        <div class="actions">
+          <button id="submitBtn" type="button">面談を予約する</button>
+          <div class="status">※送信後に表示される案内をご確認ください。</div>
+        </div>
+
+        <div id="result" class="result" aria-live="polite">未送信</div>
+      </section>
+
+      <footer>
+        ・本フォームは面談予約のためのものです。<br />
+        ・送信後、画面にエラーが表示される場合は、内容に従って入力を見直してください。
+      </footer>
+    </main>
   </div>
 
-    
-  <label>
-    <input type="checkbox" id="consent" />
-    上記に同意します（必須）
-  </label>
-</section>
-
-    
-  <button id="submitBtn">予約する</button>
-
-  <pre id="result"></pre>
-
+  <!-- app.js は同じ階層に配置 -->
   <script src="./app.js"></script>
 </body>
 </html>
