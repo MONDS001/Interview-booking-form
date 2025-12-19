@@ -1,4 +1,4 @@
-const API_BASE = "https://interview-booking-form.pages.dev/";
+const API_BASE = "https://wispy-butterfly-2a2d.m-oka-newdaysys.workers.dev/";
 
 const el = (id) => document.getElementById(id);
 
