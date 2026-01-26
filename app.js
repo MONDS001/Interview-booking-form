@@ -16,7 +16,9 @@ async function loadSlots() {
 
     select.innerHTML =
       `<option value="">選択してください</option>` +
-      data.map(s => `<option value="${s.id}">${s.label}</option>`).join("");
+      data.map(s => `<option value="${s.id}">${s.label}</option>`).join("") +
+      `<option value="OTHER">その他（候補以外の日時を希望）</option>`;
+
 
     select.disabled = false;
     loading.textContent = data.length ? "空き枠を選択してください。" : "現在、空き枠がありません。";
@@ -31,13 +33,21 @@ async function submitBooking() {
   const name = el("name").value.trim();
   const email = el("email").value.trim();
   const slotId = el("slotSelect").value;
+  const altRequest = (el("altRequest")?.value || "").trim(); // 希望曜日・時間帯など
+  const phone = (el("phone")?.value || "").trim();           // 電話番号（任意）
+  const note = (el("note")?.value || "").trim();             // 備考（任意）
+
 
   if (!consent) return alert("同意が必要です。");
   if (!name) return alert("氏名が必要です。");
   if (!email) return alert("メールが必要です。");
   if (!slotId) return alert("面談枠を選択してください。");
+  if (slotId === "OTHER" && !altRequest) {
+  return alert("「その他」を選択した場合は、ご都合のよい曜日・時間帯等をご入力ください。");
+  }
 
-  const payload = { name, email, slotId, consent: consent };
+  const payload = { name, email, slotId, consent: consent, altRequest, phone, note };
+
 
   el("submitBtn").disabled = true;
   el("result").textContent = "送信中…";
