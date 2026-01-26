@@ -219,6 +219,10 @@
             <label for="email">メールアドレス<span class="required">（必須）</span></label>
             <input id="email" type="email" autocomplete="email" placeholder="例：taro.yamada@example.com" />
             <p class="note">面談URLの送付先です。</p>
+              <!-- ★電話番号（任意）を追加 -->
+            <label for="phone" style="margin-top:12px;">電話番号（任意）</label>
+            <input id="phone" type="text" autocomplete="tel" placeholder="例：090-1234-5678" />
+            <p class="note">必要に応じてご連絡する場合があります。</p>
           </div>
         </div>
       </section>
@@ -234,6 +238,7 @@
           <label for="slotSelect">予約可能な日時<span class="required">（必須）</span></label>
           <select id="slotSelect" disabled>
             <option value="">読み込み中…</option>
+            <option value="OTHER">その他（候補以外の日時を希望）</option>
           </select>
           <div class="status" id="loading" style="margin-top:8px;">空き枠を取得中…</div>
           <div style="margin-top:14px;">
@@ -296,6 +301,21 @@
           </label>
         </div>
       </section>
+
+      <!-- 備考（任意） -->
+      <section class="card" aria-labelledby="note-title">
+        <h2 id="note-title">備考（任意）</h2>
+        <p class="note">
+          ご質問・ご要望があればご記入ください（面談希望日時の補足以外の内容も可）。
+        </p>
+        
+        <div style="margin-top:10px;">
+          <label for="note">備考（任意）</label>
+          <textarea id="note" rows="5"
+            style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--line); font-size:15px;"
+            placeholder="例：連絡のつきやすい時間帯、当日確認したいこと、その他のご相談など"></textarea>
+        </div>
+        </section>
 
       <!-- 送信 -->
       <section class="card" aria-labelledby="submit-title">
