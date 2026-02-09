@@ -1,4 +1,4 @@
-const API_BASE = "https://wispy-butterfly-2a2d.m-oka-newdaysys.workers.dev";
+const API_BASE = "/InterviewBookingForm/api";
 
 const el = (id) => document.getElementById(id);
 
@@ -19,7 +19,6 @@ async function loadSlots() {
       data.map(s => `<option value="${s.id}">${s.label}</option>`).join("") +
       `<option value="OTHER">その他（候補以外の日時を希望）</option>`;
 
-
     select.disabled = false;
     loading.textContent = data.length ? "空き枠を選択してください。" : "現在、空き枠がありません。";
   } catch (e) {
@@ -37,17 +36,23 @@ async function submitBooking() {
   const phone = (el("phone")?.value || "").trim();           // 電話番号（任意）
   const note = (el("note")?.value || "").trim();             // 備考（任意）
 
-
   if (!consent) return alert("同意が必要です。");
   if (!name) return alert("氏名が必要です。");
   if (!email) return alert("メールが必要です。");
   if (!slotId) return alert("面談枠を選択してください。");
   if (slotId === "OTHER" && !altRequest) {
-  return alert("「その他」を選択した場合は、ご都合のよい曜日・時間帯等をご入力ください。");
+    return alert("「その他」を選択した場合は、ご都合のよい曜日・時間帯等をご入力ください。");
   }
 
-  const payload = { name, email, slotId, consent: consent, altRequest, phone, note };
-
+  const payload = {
+    name,
+    email,
+    slotId,
+    consent: consent,
+    altRequest,
+    phone,
+    note
+  };
 
   el("submitBtn").disabled = true;
   el("result").textContent = "送信中…";
@@ -81,4 +86,20 @@ async function submitBooking() {
 window.addEventListener("load", () => {
   loadSlots();
   el("submitBtn").addEventListener("click", submitBooking);
+});
+
+async function loadConsentTextIfAvailable() {
+  const box = document.getElementById("consentBox");
+  try {
+    const res = await fetch("/InterviewBookingForm/api/consent", { cache: "no-store" });
+    if (!res.ok) return; // 失敗ならデフォルトを維持
+    const text = await res.text();
+    if (text && text.trim()) box.textContent = text; // 取れたら上書き
+  } catch (_) {
+    // 何もしない（デフォルト文言を維持）
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadConsentTextIfAvailable();
 });

@@ -175,6 +175,9 @@
       font-size: 12.5px;
       color: var(--muted);
     }
+    .consent-box {
+      white-space: pre-wrap;
+    }
 
     footer {
       margin-top: 18px;
@@ -255,8 +258,12 @@
       <!-- 個人情報同意 -->
       <section class="card" aria-labelledby="consent-title">
         <h2 id="consent-title">個人情報の取り扱いについて</h2>
-
-        <div class="consent-box" role="region" aria-label="個人情報の取り扱い（全文）">
+<!--
+        <div class="consent-box" role="region" aria-label="個人情報の取り扱い（全文）" id="consentBox">
+        読み込み中…
+        </div>
+-->
+        <div class="consent-box" role="region" aria-label="個人情報の取り扱い（全文）" id="consentBox">
 個人情報の取り扱いについて
 弊社は応募者の個人情報をお預かりすることになりますが、そのお預かりした個人情報の取扱について、下記のように管理し、保護に努めて参ります。
 
@@ -292,7 +299,6 @@
 
 受付時間：9:00～18:00（平日）
         </div>
-
         <div class="checkbox-row">
           <input type="checkbox" id="consent" />
           <label for="consent" style="font-weight:600;">
@@ -340,5 +346,8 @@
 
   <!-- app.js は同じ階層に配置 -->
   <script src="./app.js"></script>
+  <!--ローカル用 -->
+  <!--<script src="/InterviewBookingForm/static/app.js"></script>-->
+
 </body>
 </html>
