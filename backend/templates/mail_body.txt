@@ -1,7 +1,7 @@
 {name} 様
 
 面談予約を受け付けました。
-予約内容：{slot_label}
+予約内容：{slot_label}{request_label}{note_label}
 受付番号：{booking_id}
 
 このメールは自動送信です。
